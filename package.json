@@ -1,0 +1,20 @@
+{
+  "name": "cmpp",
+  "version": "0.0.1",
+  "description": "An implementation for cmpp 2.0 protocol using Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.s.upyun.com/yu.zheng/cmpp.git"
+  },
+  "keywords": [
+    "cmpp2.0",
+    "cmpp",
+    "sms"
+  ],
+  "author": "taevas <di4urp@gmail.com>",
+  "license": "ISC"
+}
