@@ -16,5 +16,11 @@
     "sms"
   ],
   "author": "taevas <di4urp@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "iconv-lite": "^0.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0"
+  }
 }
