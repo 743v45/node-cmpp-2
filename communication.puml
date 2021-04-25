@@ -1,0 +1,74 @@
+@startuml
+participant SP order 1
+participant ISMG1 order 2
+participant ISMG2 order 3
+participant SMC order 4
+
+note over SP, ISMG1
+  基于 CMPP 协议通信
+end note
+
+note over ISMG1, ISMG2
+  基于 CMPP 协议通信
+end note
+
+note over ISMG2, SMC
+  基于 SMPP 协议通信
+end note
+
+SP -> ISMG1: CMPP_CONNECT 建立连接
+activate ISMG1
+ISMG1 --> SP: CMPP_CONNECT_RESP 连接响应
+deactivate ISMG1
+
+...
+
+SP -> ISMG1: CMPP_ACTIVE_TEST 心跳请求
+activate ISMG1
+ISMG1 --> SP: CMPP_ACTIVE_TEST_RESP 心跳响应
+deactivate ISMG1
+
+...
+
+
+SP -> ISMG1: CMPP_SUBMIT 提交短信（并存储在 ISMG1）
+activate ISMG1
+ISMG1 --> SP: CMPP_SUBMIT_RESP 接收到短信
+deactivate ISMG1
+
+ISMG1 -> ISMG2: CMPP_FWD  (MT 前转)
+activate ISMG2
+ISMG2 --> ISMG1: CMPP_FWD_RESP (MT 前转响应)
+deactivate ISMG2
+
+ISMG2 -> SMC: 发送短信
+activate SMC
+SMC --> ISMG2: 发送短信响应
+deactivate SMC
+
+...手机接收到短信后...
+SMC -> ISMG2: 短信下行回调
+activate ISMG2
+ISMG2 --> SMC: 短信上行回调响应
+deactivate ISMG2
+
+ISMG2 -> ISMG1: CMPP_FWD (MT 时的状态报告)
+activate ISMG1
+ISMG1 --> ISMG2: CMPP_FWD_RESP (MT 时的状态报告响应)
+deactivate ISMG1
+
+
+ISMG1 -> SP: CMPP_DELIVER （状态报告）
+activate SP
+SP --> ISMG1: CMPP_DELIVER_RESP （状态报告响应）
+deactivate SP
+
+...
+
+SP -> ISMG1: CMPP_TERMINATE 拆除连接
+activate ISMG1
+ISMG1 --> SP: CMPP_TERMINATE_RESP 拆除响应
+deactivate ISMG1
+
+
+@enduml
