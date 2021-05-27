@@ -1,6 +1,6 @@
 {
   "name": "cmpp",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "An implementation for cmpp v2.0 / v3.0 protocol using Node.js.",
   "main": "index.js",
   "scripts": {
